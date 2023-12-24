@@ -1,0 +1,102 @@
+{% extends "mylist/index.html" %}
+{% load static %}
+{% block content %}
+    <div id="alert-container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %} 
+        {% endif %}
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-12">
+            <div class="stream-link">
+                <div class="streaming-icons">
+                    <a href="https://www.netflix.com" target="_blank">
+                      <img src="{% static "mylist/img/netflix.png" %}" alt="Netflix">
+                    </a>
+                    <a href="https://www.hulu.com/welcome" target="_blank">
+                      <img src="{% static "mylist/img/hulu.png" %}" alt="Hulu">
+                    </a>
+                    <a href="https://www.crunchyroll.com/" target="_blank">
+                        <img src="{% static "mylist/img/crunchyroll.png" %}" alt="Crunchyroll">
+                    </a>
+                    <a href="https://play.max.com/" target="_blank">
+                        <img src="{% static "mylist/img/max.png" %}" alt="Max">
+                    </a>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-lg-6 col-md-4 col-12">
+            <div class="priority-background">
+                <h2 class="priority-header">Media Priority Watch List</h2>
+                <div id="media-priority-watch">
+                    {% if priority_media_list %}
+                        <ol class="priority-list">
+                            {% for priority in priority_media_list %}
+                                <li class="priority-item">
+                                    <div class="priority-poster-container">
+                                        <img src="{{ priority.priority_poster }}" alt="poster" class="priority-poster">
+                                    </div>
+                                    <div class="priority-details">
+                                        <h1>{{ priority.priority_title }}</h1>
+                                        <p>{{ priority.priority_year }} <br> {{ priority.priority_genre }}</p>
+                                        <div class="priority-lists-buttons">
+                                            <a href="{% url 'mylist-priority-media-to-completed' priority.id %}">
+                                                <button class="priority-btn priority-comp-btn"><i class="fa-solid fa-check"></i></button>
+                                            </a>
+                                            <a href="{% url 'mylist-remove-priority-media' priority.id %}">
+                                                <button class="priority-btn priority-remove-btn"><i class="fa-solid fa-xmark"></i></button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    {% else %}
+                        <p class="empty-lists">Media priority list is empty.</p>
+                    {% endif %}
+                </div>
+
+                <h2 class="priority-header">Anime Priority Watch List</h2>
+                <div id="anime-priority-watch">
+                    {% if priority_anime_list %}
+                        <ol class="priority-list">
+                            {% for priority in priority_anime_list %}
+                                <li class="priority-item">
+                                    <div class="priority-poster-container">
+                                        <img src="{{ priority.priority_anime_poster }}" alt="poster" class="priority-poster">
+                                    </div>
+                                    <div class="priority-details">
+                                        <h1>{{ priority.priority_anime_title }}</h1>
+                                        <p>{{ priority.priority_anime_year }} <br> {{ priority.priority_anime_genre }}</p>
+                                        <div class="lists-buttons">
+                                            <a href="{% url 'mylist-priority-media-to-completed-anime' priority.id %}">
+                                                <button class="priority-btn priority-comp-btn"><i class="fa-solid fa-check"></i></button>
+                                            </a>
+                                            <a href="{% url 'mylist-remove-priority-anime' priority.id %}">
+                                                <button class="priority-btn priority-remove-btn"><i class="fa-solid fa-xmark"></i></button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    {% else %}
+                        <p class="empty-lists">Anime priority list is empty.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-lg-3 col-md-4 col-12">
+            <div id="upcoming-movies"></div>
+        </div>
+    </div>
+
+    <script src="{% static 'mylist/upcoming.js'%}"></script>
+{% endblock %}

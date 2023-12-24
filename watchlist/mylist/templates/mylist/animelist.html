@@ -1,0 +1,95 @@
+{% extends "mylist/index.html" %}
+{% load static %}
+{% block content %}
+    <h1 class="my-anime-header">My Anime List</h1>
+
+    <div class="filter-container">
+        <i class="fa-solid fa-filter filter-icon"></i>
+        <form method="GET" action="{% url 'mylist-animelist' %}" class="genre-filter-form">
+          <input type="text" name="genre" placeholder="Enter genre" value="{{ genre_filter }}">
+          <button type="submit" class="filter-button">Filter</button>
+          {% if genre_filter %}
+            <a href="{% url 'mylist-animelist' %}" class="exit-filter">Exit Filter</a>
+          {% endif %}
+        </form>
+    </div>
+
+    <div class="queue-title">
+        <h3>On Queue</h3>
+    </div>
+    <div class="queue-list">
+        {% if anime_list %}
+            <div id="media-list" class="media-scroller snaps-inline">
+                {% for anime in anime_list %}
+                    <div id="media-item" class="media-element">
+                        <img src="{{ anime.animeposter }}" alt="poster" class="poster">
+                        <div class="overlay">
+                        <h1 class="card-title">{{ anime.animetitle }}</h1>
+                        <p class="card-sub-title">{{ anime.animeyear }} <br> {{ anime.animegenre }}</p>
+                        <div class="lists-buttons">
+                            <a href="{% url 'mylist-completed-anime' anime.id %}"><button id="media-btn" class="comp-btn"><i class="fa-solid fa-check"></i></button></a>
+                            <a href="{% url 'mylist-not-completed-anime' anime.id %}"><button id="media-btn" class="notcomp-btn"><i class="fa-solid fa-clock-rotate-left"></i></button></a>
+                            <a href="{% url 'mylist-remove-anime' anime.id %}"><button id="media-btn" class="remove-btn"><i class="fa-solid fa-xmark"></i></button></a>
+                        </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="empty-lists">Queue list is empty.</p>
+        {% endif %}
+    </div>
+    
+    <div id="completed-col">
+        <h3>Completed</h3>
+        <div class="completed-list">
+            {% if completed_anime_list %}
+                <div id="completed-list" class="media-scroller snaps-inline">
+                    {% for anime in completed_anime_list %}
+                        <div id="media-item" class="media-element">
+                            <img src="{{ anime.comp_anime_poster }}" alt="poster" class="poster">
+                            <div class="overlay">
+                              <h1 class="card-title">{{ anime.comp_anime_title }}</h1>
+                              <p class="card-sub-title">{{ anime.comp_anime_year }} <br> {{ anime.comp_anime_genre }}</p>
+                              <div class="lists-buttons">
+                                <a href="{% url 'mylist-remove-completed-anime' anime.id %}"><button id="media-btn" class="remove-btn"><i class="fa-solid fa-xmark"></i></button></a>
+                              </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="empty-lists">Completed list is empty.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div id="not-completed-col">
+        <h3>Not Completed</h3>
+        <div class="not-completed-list">
+            {% if not_completed_anime_list %}
+                <div id="not-completed-list" class="media-scroller snaps-inline">
+                    {% for anime in not_completed_anime_list %}
+                        <div id="media-item" class="media-element">
+                            <img src="{{ anime.notcomp_anime_poster }}" alt="poster" class="poster">
+                            <div class="overlay">
+                                <a href="{% url 'mylist-priority-anime' anime.id %}"><button id="media-btn" class="star-btn"><i class="fa-regular fa-star"></i></button></a>
+                                <h1 class="card-title">{{ anime.notcomp_anime_title }}</h1>
+                                <p class="card-sub-title">{{ anime.notcomp_anime_year }} <br> {{ anime.notcomp_anime_genre }}</p>
+                                <div class="lists-buttons">
+                                    <a href="{% url 'mylist-not-completed-to-completed-anime' anime.id %}"><button id="media-btn" class="comp-btn"><i class="fa-solid fa-check"></i></button></a>
+                                    <a href="{% url 'mylist-remove-not-completed-anime' anime.id %}"><button id="media-btn" class="remove-btn"><i class="fa-solid fa-xmark"></i></button></a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="empty-lists">Not Completed list is empty.</p>
+            {% endif %}
+        </div>
+    </div>
+
+  <script src="{% static 'mylist/main.js'%}"></script>
+  <script src="{% static 'mylist/config.js'%}"></script>
+{% endblock %}

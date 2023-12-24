@@ -1,0 +1,48 @@
+{% extends "mylist/index.html" %}
+{% load static %}
+{% block content %}
+    <style>
+        body {
+            background-color: var(--dark-color);
+        }
+    </style>
+
+    <div class="wrapper">
+
+        <div class = "container">
+            <h2 class="search-header">Search for Movies, TV Shows, & Anime!</h2>
+        </div>
+
+        <!-- Search Movie/TV Show Container -->
+        <div class="search-container">
+            <div class="search-element">
+                <input type="text" class="form-control" placeholder="Enter Movie/TV/Anime Title..." id="search-title" onkeyup="find_reference()" onclick = "find_reference()">
+                <div class="search-list" id="search-list">
+
+                </div>
+            </div>
+        </div>  
+
+        <!-- Results -->
+        <div class="container">
+            <div class="results-container">
+                <div class="results" id="results">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="alert-container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %} 
+        {% endif %}
+    </div>
+     
+    <script src="{% static 'mylist/main.js'%}"></script>
+    <script src="{% static 'mylist/config.js'%}"></script>
+{% endblock %}
