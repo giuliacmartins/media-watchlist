@@ -1,0 +1,25 @@
+{% extends "mylist/index.html" %}
+{% load static %}
+{% block content %}
+    <video autoplay loop muted plays-inline class="bg-video">
+        <source src="{% static 'mylist/img/moviemon.mp4'%}" type="video/mp4">
+    </video>
+
+    <div class="welcome-header">
+        <h1 class="popup-login-btn" id="welcome-header">WELCOME <br> BACK, GIULIA!</h1>
+    </div>
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend id="login-header" class="border-bottom mb-4">Log In</legend>
+                {{ form.as_p }}
+            </fieldset>
+            <div class="form-group">
+                <button class="login-btn" type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="{% static 'mylist/loginpopup.js'%}"></script>
+{% endblock %}
