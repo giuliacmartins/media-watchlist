@@ -22,6 +22,8 @@
 
 <img width="609" alt="Screenshot 2024-01-10 at 2 31 35 AM" src="https://github.com/giuliacmartins/media-watchlist/assets/116525917/1c83e0cd-f74c-4f95-9fab-0d6245464c80">
 
+************************************************************************************************************************************************************************************
+
 This project was based on personal preferences. I created a website using Django with HTML, CSS, JavaScript, and PostgreSQL. This was a step-up to my HTML & CSS Only Project where I included free APIs that stored upcoming movies and pre-existing media to create my personal watchlist and search for media to put on my "Watch Later" list.
 
 ***NOTE: a local host was used for PostgreSQL. If you want to see the final product, you would have to make sure to have PostgreSQL in your local machine and have the right migrations.***
