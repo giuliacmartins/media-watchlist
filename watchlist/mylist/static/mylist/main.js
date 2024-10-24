@@ -1,3 +1,4 @@
+// create your own api key from omdb 
 const search_title = document.getElementById('search-title');
 const search_list = document.getElementById('search-list');
 const results = document.getElementById('results');
@@ -5,7 +6,7 @@ const results = document.getElementById('results');
 /* access the API */
 async function load_reference (search_term) 
 {
-    const url = `http://www.omdbapi.com/?s=${search_term}&apikey=17068f89`;
+    const url = `http://www.omdbapi.com/?s=${search_term}&apikey=${your_own_api_key}`;
     const resp = await fetch(`${url}`);
     const data = await resp.json();
 
@@ -74,7 +75,7 @@ function load_ref_details()
             search_list.classList.add('hide-search-list');
             search_title.value = "";
 
-            const result = await fetch(`http://www.omdbapi.com/?i=${ref.dataset.id}&apikey=17068f89`);
+            const result = await fetch(`http://www.omdbapi.com/?i=${ref.dataset.id}&apikey=${your_own_api_key}`);
             const details = await result.json();
             display_details(details);
         });
