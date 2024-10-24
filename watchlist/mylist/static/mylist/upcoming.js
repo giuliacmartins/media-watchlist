@@ -1,10 +1,9 @@
-// // apikey=17068f89
-// // tmdb: 62a4a3b710649252ad7094ec0596a769
+// add your own api key from tmdb
 var today = new Date();
 var todayString = today.toISOString().split("T")[0]; 
 
 async function fetchUpcomingMovies() {
-  var apiKey = "62a4a3b710649252ad7094ec0596a769";
+  var apiKey = "";
   var url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US`;
 
   var response = await fetch(url);
@@ -23,7 +22,7 @@ async function fetchUpcomingMovies() {
 }
 
 async function fetchMovieDetails(movieId) {
-  var apiKey = "62a4a3b710649252ad7094ec0596a769";
+  var apiKey = "";
   var url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`;
 
   var response = await fetch(url);
